@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  database:
+    image: mysql:debian
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db-mysql:/var/lib/mysql
+  api:
+    image: luketrismegistus/api:latest
+    environment:
+      DB_HOST: database
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+volumes:
+  db-mysql:
